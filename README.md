@@ -1,19 +1,17 @@
 # Candidate View
 
-A PHP web application that displays election data from a MySQL database in an interactive, sortable table.
+A PHP web application that displays unbaised candidate data from a MySQL database in an interactive, sortable table.
 
-## Features
+## Screenshot
 
-- Fetches data from a MySQL database and renders it as an HTML table
-- Interactive sorting, searching, and pagination via [DataTables](https://datatables.net/)
-- Database credentials managed via environment variables (no hardcoded secrets)
+![Candidate View](screenshot.png)
 
 ## Requirements
 
 - PHP 7.4+ with `mysqli` extension
 - MySQL database
 
-## Setup
+## Local Setup
 
 1. Clone the repo:
    ```bash
@@ -21,9 +19,9 @@ A PHP web application that displays election data from a MySQL database in an in
    cd candidate-view
    ```
 
-2. Install MySQL (if not already installed):
+2. Install MySQL (MariaDB is recommended on Debian):
    ```bash
-   sudo apt install mysql-server
+   sudo apt install mariadb-server
    sudo systemctl start mysql
    sudo mysql_secure_installation
    ```
@@ -34,16 +32,16 @@ A PHP web application that displays election data from a MySQL database in an in
    ```
    Then in the MySQL shell:
    ```sql
-   CREATE DATABASE 2012_election;
+   CREATE DATABASE candidates;
     CREATE USER 'username'@'localhost' IDENTIFIED BY 'your_password';
-    GRANT ALL PRIVILEGES ON 2012_election.* TO 'username'@'localhost';
+    GRANT ALL PRIVILEGES ON candidates.* TO 'username'@'localhost';
    FLUSH PRIVILEGES;
    EXIT;
    ```
 
-4. Import the `GOP_primary` table (if you have a SQL dump):
+4. Import the provided SQL dump:
    ```bash
-   mysql -u username -p 2012_election < GOP_primary.sql
+   mysql -u username -p candidates < candidates.sql
    ```
 
 5. Set environment variables for your database connection:
@@ -51,7 +49,7 @@ A PHP web application that displays election data from a MySQL database in an in
    export DB_HOST=localhost
    export DB_USER=username
    export DB_PASS=your_password
-   export DB_NAME=2012_election
+   export DB_NAME=election
    ```
 
 6. Serve with PHP's built-in server:
@@ -60,10 +58,3 @@ A PHP web application that displays election data from a MySQL database in an in
    ```
 
 7. Open `http://localhost:8000` in your browser.
-
-## Project Structure
-
-```
-index.php      - Main application page
-config.php     - Database configuration (reads from environment variables)
-.gitignore     - Files excluded from version control
