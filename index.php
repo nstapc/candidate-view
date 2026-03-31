@@ -48,7 +48,7 @@ $con->close();
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 1200px;
+            max-width: 95%;
             margin: 0 auto;
             padding: 20px;
             background-color: #f5f5f5;
@@ -63,6 +63,32 @@ $con->close();
             padding: 15px;
             border-radius: 5px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        #data-table {
+            font-size: 14px;
+        }
+        #data-table th {
+            text-align: center;
+            vertical-align: middle;
+            padding: 8px;
+            white-space: nowrap;
+        }
+        #data-table th img {
+            max-width: 120px;
+            height: auto;
+        }
+        #data-table td {
+            vertical-align: top;
+            padding: 8px;
+            word-wrap: break-word;
+            max-width: 300px;
+        }
+        #data-table td img {
+            max-width: 150px;
+            height: auto;
+        }
+        #data-table td a {
+            color: #007bff;
         }
     </style>
 </head>
