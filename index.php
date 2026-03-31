@@ -29,8 +29,8 @@ $image_col = null;
 for ($i = 0; $i < $result->field_count; $i++) {
     $field = $result->fetch_field();
     $fields[] = $field->name;
-    if (strtolower($field->name) === 'name') $name_col = $i;
-    if (strtolower($field->name) === 'image') $image_col = $i;
+    if (strpos($field->name, 'Name.png') !== false) $name_col = $i;
+    if (strpos($field->name, 'Image.png') !== false) $image_col = $i;
 }
 
 // Build table rows
