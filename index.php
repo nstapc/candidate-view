@@ -22,6 +22,36 @@ if (!$result) {
     die("Query failed: " . $con->error);
 }
 
+// Map image-based column names to readable text
+function get_column_label($field_name) {
+    $map = [
+        'Name.png' => 'Name',
+        'Image.png' => 'Image',
+        'BirthplaceandDate.png' => 'Birthplace & Date',
+        'HomeState.png' => 'Home State',
+        'EducationalGeneralBackground.png' => 'Education',
+        'PoliticalBackground.png' => 'Political Background',
+        'ReligiousViews.png' => 'Religious Views',
+        'KeyStates.png' => 'Key States',
+        'MainEndorsement.png' => 'Main Endorsement',
+        'MainSupporters.png' => 'Main Supporters',
+        'Taxes.png' => 'Taxes',
+        'SocialSecurity.png' => 'Social Security',
+        'MilitaryDefense.png' => 'Military & Defense',
+        'HealthCare.png' => 'Health Care',
+        'JobCreationEconomicRecovery.png' => 'Job Creation / Economy',
+        'Environment.png' => 'Environment',
+        'Energy.png' => 'Energy',
+        'Immigration.png' => 'Immigration',
+        'GunControl.png' => 'Gun Control',
+        'Marriage.png' => 'Marriage',
+    ];
+    foreach ($map as $key => $label) {
+        if (strpos($field_name, $key) !== false) return $label;
+    }
+    return $field_name;
+}
+
 // Build table headers and find Name/Image column indices
 $fields = [];
 $name_col = null;
@@ -109,7 +139,7 @@ $con->close();
                 <tr>
                     <?php foreach ($fields as $i => $field): ?>
                         <?php if ($image_col !== null && $i === $image_col) continue; ?>
-                        <th><?php echo $field; ?></th>
+                        <th><?php echo get_column_label($field); ?></th>
                     <?php endforeach; ?>
                 </tr>
             </thead>
