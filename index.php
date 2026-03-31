@@ -74,7 +74,7 @@ $con->close();
             <thead>
                 <tr>
                     <?php foreach ($fields as $field): ?>
-                        <th><?php echo htmlspecialchars($field); ?></th>
+                        <th><?php echo $field; ?></th>
                     <?php endforeach; ?>
                 </tr>
             </thead>
@@ -82,7 +82,7 @@ $con->close();
                 <?php foreach ($rows as $row): ?>
                     <tr>
                         <?php foreach ($row as $cell): ?>
-                            <td><?php echo htmlspecialchars($cell); ?></td>
+                            <td><?php echo $cell; ?></td>
                         <?php endforeach; ?>
                     </tr>
                 <?php endforeach; ?>
