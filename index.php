@@ -8,7 +8,7 @@
 
 require_once __DIR__ . '/config.php';
 
-$table = 'GOP_primary';
+$table = 'Republican Primary Candidates';
 
 // Connect to database using mysqli
 $con = new mysqli($db_config['host'], $db_config['user'], $db_config['pass'], $db_config['name']);
