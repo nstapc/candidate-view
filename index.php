@@ -101,7 +101,7 @@ $con->close();
     </style>
 </head>
 <body>
-    <h1>Candidate View: <?php echo htmlspecialchars($table); ?></h1>
+    <h1><?php echo htmlspecialchars($table); ?></h1>
 
     <div id="candidates-table">
         <table id="data-table" class="display" style="width:100%">
