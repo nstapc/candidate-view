@@ -22,16 +22,24 @@ if (!$result) {
     die("Query failed: " . $con->error);
 }
 
-// Build table headers
+// Build table headers and find Name/Image column indices
 $fields = [];
+$name_col = null;
+$image_col = null;
 for ($i = 0; $i < $result->field_count; $i++) {
     $field = $result->fetch_field();
     $fields[] = $field->name;
+    if (strtolower($field->name) === 'name') $name_col = $i;
+    if (strtolower($field->name) === 'image') $image_col = $i;
 }
 
 // Build table rows
 $rows = [];
 while ($row = $result->fetch_row()) {
+    // If we have both Name and Image columns, merge them
+    if ($name_col !== null && $image_col !== null) {
+        $row[$name_col] = $row[$name_col] . '<br>' . $row[$image_col];
+    }
     $rows[] = $row;
 }
 
@@ -99,7 +107,8 @@ $con->close();
         <table id="data-table" class="display" style="width:100%">
             <thead>
                 <tr>
-                    <?php foreach ($fields as $field): ?>
+                    <?php foreach ($fields as $i => $field): ?>
+                        <?php if ($image_col !== null && $i === $image_col) continue; ?>
                         <th><?php echo $field; ?></th>
                     <?php endforeach; ?>
                 </tr>
@@ -107,7 +116,8 @@ $con->close();
             <tbody>
                 <?php foreach ($rows as $row): ?>
                     <tr>
-                        <?php foreach ($row as $cell): ?>
+                        <?php foreach ($row as $i => $cell): ?>
+                            <?php if ($image_col !== null && $i === $image_col) continue; ?>
                             <td><?php echo $cell; ?></td>
                         <?php endforeach; ?>
                     </tr>
